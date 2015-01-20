@@ -53,6 +53,25 @@
 (fact "99 returns ninety nine"
       (convert 99) => "ninety nine")
 
+
+(fact "100 returns one hundred"
+      (convert 100) => "one hundred")
+
+(fact "101 returns one hundred and one"
+      (convert 101) => "one hundred and one")
+
+(fact "102 returns one hundred and two"
+      (convert 102) => "one hundred and two")
+
+(fact "110 returns one hundred and ten"
+      (convert 110) => "one hundred and ten")
+
+(fact "199 returns one hundred and ninety nine"
+      (convert 199) => "one hundred and ninety nine")
+
+(fact "999 returns nine hundred and ninety nine"
+      (convert 999) => "nine hundred and ninety nine")
+
 (fact "quotmod supplied with dividend and divisor returns a vector of quotient and modulus"
       (quotmod 1 10) => [0 1]
       (quotmod 3 10) => [0 3]

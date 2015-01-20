@@ -25,7 +25,7 @@
    18 "eighteen"
    19 "nineteen"})
 
-(def tens
+(def tens-to-word
   {20 "twenty"
    30 "thirty"
    40 "forty"
@@ -35,23 +35,27 @@
    80 "eighty"
    90 "ninety"})
 
-(defn tens-to-word
-  [n]
-  (tens n))
 
 (defn quotmod [n d]
-        [(quot n d) (mod n d)])
+  (let [quotient (quot n d)
+        modulus (mod n d)]
+    [quotient (if (= modulus 0) nil modulus) ]))
 
 
-(defn convert
+(defn tens
   "Convert int to words"
   [n]
-  (let [[q m] (quotmod n 10)]
-   (condp = q
+  (let [[tens units] (quotmod n 10)]
+   (condp = tens
      1 (teens-to-word n)
      0 (units-to-word n)
-     (clojure.string/trim
-      (clojure.string/join " " (vector (tens-to-word (* 10 q)) (convert m)))))))
+     (str (tens-to-word (* 10 tens)) (when units (str " " (convert units)))))))
+
+(defn convert [n]
+  (let [[a b] (quotmod n 100)]
+    (cond
+      (>= a 1) (str (tens a) " hundred" (when b (str " and " (convert b))))
+      (= a 0) (tens n))))
 
 (defn -main
   "I don't do a whole lot ... yet."
