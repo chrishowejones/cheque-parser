@@ -52,9 +52,11 @@
      (str (tens-to-word (* 10 tens)) (when units (str " " (convert units)))))))
 
 (defn convert [n]
-  (let [[a b] (quotmod n 100)]
+  (let [[a b] (quotmod n 1000)]
     (cond
-      (>= a 1) (str (tens a) " hundred" (when b (str " and " (convert b))))
+      (>= a 1) (str (tens a) " thousand" (when b (str (convert b))))
+      (>= b 100) (let [[hs ts] (quotmod b 100)]
+                   (str (tens hs) " hundred" (when ts (str " and " (convert ts)))))
       (= a 0) (tens n))))
 
 (defn -main
