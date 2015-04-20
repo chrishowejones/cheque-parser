@@ -1,12 +1,16 @@
 # cheque-parser
 
-FIXME: description
+This is project was created as an exercise. The intent is to take a
+number and parse it into the textual representation as if someone were
+writing it in the text part of a cheque.
+
+Only supports english language.
+
+Currently only supports integer values and has no concept of currency.
 
 ## Installation
 
-Download from http://example.com/FIXME.
-
-## Usage
+Download from http://github.com/chrishowejones/cheque-parser
 
 FIXME: explanation
 
