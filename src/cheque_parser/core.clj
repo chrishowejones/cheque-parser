@@ -76,15 +76,25 @@
       (= a 0) (tens n))))
 
 
+(defn largest-divisor
+  "Given a number, returns the largest number in divisors-to-words that is less than or equal to the number."
+  [number]
+  (ffirst (filter #(>= number (first %)) divisors-to-words)))
+
 (defn number-to-words
-  "Looks up a number value and returns the word for the number"
-  [num]
-  (divisors-to-words num))
+  "Looks up a number value less than 100 and returns the words for the number."
+  [number]
+  (loop [[quotient modulus] (quotmod number (largest-divisor number))
+         words (divisors-to-words (largest-divisor number))]
+    (if (nil? modulus)
+      words
+      (recur (quotmod modulus (largest-divisor modulus))
+             (str words " " (divisors-to-words modulus))))))
 
 (defn base-ten-to-word
   "Looks up the suffix word for base ten units."
-  [num]
-  (clojure.string/join (base-ten-units num)))
+  [number]
+  (clojure.string/join (base-ten-units number)))
 
 (defn multiple-of-ten-words
   [quotient words unit]
@@ -94,8 +104,8 @@
 
 (defn convert-base-ten
   "Converts a number divisable by base ten units down to 100 to a string"
-  [num]
-  (loop [n num
+  [number]
+  (loop [n number
          base-units base-ten-units
          words []]
     (if (or (empty? base-units) (nil? n) (zero? n))
@@ -108,14 +118,14 @@
                  (multiple-of-ten-words quotient words unit)
                  (cons (convert-base-ten quotient) (vector (base-ten-to-word unit)))))))))
 
-(defn new-convert [num]
+(defn new-convert [number]
   (str
-   (if (> num last-base-ten-value)
-     (let [remainder (mod num last-base-ten-value)]
+   (if (> number last-base-ten-value)
+     (let [remainder (mod number last-base-ten-value)]
       (str
-       (convert-base-ten num)
+       (convert-base-ten number)
        (if (not (zero? remainder))
          (str
           " and "
           (number-to-words remainder)))))
-     (number-to-words num))))
+     (number-to-words number))))

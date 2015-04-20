@@ -85,6 +85,15 @@
       (quotmod 100000 1000) => [100 nil])
 
 
+(facts "largest-divisor returns the largest divisor from divisor-to-words for a given nubmer."
+       (fact "largest-divisor returns 70 for 70"
+             (largest-divisor 70) => 70)
+       (fact "largest-divisor returns 99 for 90"
+             (largest-divisor 99) => 90)
+       (fact "largest-divisor returns 13 for 13"
+             (largest-divisor 13) => 13))
+
+
 (facts "number-to-words returns words for numbers"
  (fact "number-to-words returns one for 1"
        (number-to-words 1) => "one")
@@ -98,6 +107,14 @@
        (number-to-words 20) => "twenty")
  (fact "number-to-words returns twenty for 90"
        (number-to-words 90) => "ninety"))
+
+(facts "number-to-words returns words for numbers - covering tens and units"
+       (fact "number-to-words returns 'twenty one' for 21"
+             (number-to-words 21) => "twenty one")
+       (fact "number-to-words returns 'seventy eight' for 78"
+             (number-to-words 78) => "seventy eight")
+       (fact "number-to-words returns 'ninety nine' for 99"
+             (number-to-words 99) => "ninety nine"))
 
 (facts "base-ten-to-word returns words for base ten unit"
  (fact "base-ten-to-word returns hundred for 100"
