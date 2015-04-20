@@ -131,6 +131,7 @@
       (multiple-of-ten-words 90 [] 1000) => ["ninety thousand"]
       (multiple-of-ten-words 5 ["one thousand"] 100) => ["one thousand" "five hundred"])
 
+
 (facts "convert-base-ten returns the multiple for each base as a string"
        (fact "convert-base-ten returns 'one hundred' for 100"
              (convert-base-ten 100) => "one hundred")
@@ -149,4 +150,10 @@
        (fact "convert-base-ten returns 'three hundred million billion' for 300000000000"
              (convert-base-ten 300000000000) => "three hundred billion")
        (fact "convert-base-ten returns 'three hundred million billion' for 300000000000"
-             (convert-base-ten 900000000000000000) => "nine hundred million billion"))
+             (convert-base-ten 900000000000000000) => "nine hundred million billion")
+       (fact "convert-base-ten returns 'two thousand two hundred' for 2200"
+             (convert-base-ten 2200) => "two thousand two hundred")
+       (fact "convert-base-ten returns 'twenty thousand two hundred' for 20200"
+             (convert-base-ten 20200) => "twenty thousand two hundred")
+       (fact "convert-base-ten returns 'two hundred thousand two hundred' for 200200"
+             (convert-base-ten 200200) => "two hundred thousand two hundred"))

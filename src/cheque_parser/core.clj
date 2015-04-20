@@ -1,5 +1,6 @@
 (ns cheque-parser.core
-  (:gen-class))
+  (:gen-class)
+  (:require [clojure.string :as str]))
 
 (def units-to-word
   {0 ""
@@ -56,26 +57,6 @@
                         (into teens-to-word)
                         (into units-to-word)))
 
-(declare convert)
-
-(defn tens
-  "Convert int to words"
-  [n]
-  (let [[tens units] (quotmod n 10)]
-    (condp = tens
-      1 (teens-to-word n)
-      0 (units-to-word n)
-      (str (tens-to-word (* 10 tens)) (when units (str " " (convert units)))))))
-(
-  defn convert [n]
-  (let [[a b] (quotmod n 1000)]
-    (cond
-      (>= a 1) (str (tens a) " thousand" (when b (str (convert b))))
-      (>= b 100) (let [[hs ts] (quotmod b 100)]
-                   (str (tens hs) " hundred" (when ts (str " and " (convert ts)))))
-      (= a 0) (tens n))))
-
-
 (defn largest-divisor
   "Given a number, returns the largest number in divisors-to-words that is less than or equal to the number."
   [number]
@@ -115,12 +96,12 @@
         (recur modulus
                (into {} (rest base-units))
                (if (< quotient last-base-ten-value)
-                 (multiple-of-ten-words quotient words unit)
+                 (multiple-of-ten-words quotient (vec words) unit)
                  (cons (convert-base-ten quotient) (vector (base-ten-to-word unit)))))))))
 
-(defn new-convert [number]
+(defn convert [number]
   (str
-   (if (> number last-base-ten-value)
+   (if (>= number last-base-ten-value)
      (let [remainder (mod number last-base-ten-value)]
       (str
        (convert-base-ten number)
