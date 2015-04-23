@@ -104,3 +104,27 @@
              (largest-divisor 99) => 90)
        (fact "largest-divisor returns 13 for 13"
              (largest-divisor 13) => 13))
+
+
+(fact "hundreds? returns true if the number passed to it is wholy divisable by one hundred."
+      (fact "hundreds? returns true for 100"
+            (hundreds? 100) => true)
+      (fact "hundreds? returns true for 2100"
+            (hundreds? 2100) => true)
+      (fact "hundreds? returns true for 45100300"
+            (hundreds? 45100300) => true)
+      (fact "hundreds? returns false for 40"
+            (hundreds? 40) => false)
+      (fact "hundreds? returns false for 1"
+            (hundreds? 1) => false)
+      (fact "hundreds? returns true for 101"
+            (hundreds? 101) => false))
+
+(fact "convert-to-words returns the number in words without 'and' as a conjoining
+word"
+      (fact "convert-to-words returns ten for 10"
+            (convert-to-words 10) => "ten")
+      (fact "convert-to-words returns seven hundred fifty six for 756"
+            (convert-to-words 756) => "seven hundred fifty six")
+      (fact "convert-to-words returns fifty six billion three hundred million ninety six thousand eleven for 56300096011"
+            (convert-to-words 56300096011) => "fifty six billion three hundred million ninety six thousand eleven"))
