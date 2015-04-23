@@ -75,14 +75,26 @@
 (fact "1000 returns one thousand"
       (convert 1000) => "one thousand")
 
+(fact "1415 returns one thousand four hundred and fifteen"
+      (convert 1415) => "one thousand four hundred and fifteen")
+
+(fact "3004926 returns three million four thousand nine hundred and twenty six"
+      (convert 3004926) => "three million four thousand nine hundred and twenty six")
+
+(fact "45100000 returns 'forty five million one hundred thousand'"
+      (convert 45100000) => "forty five million one hundred thousand")
+
+(fact "7968345123 returns 'seven billion nine hundred sixty eight million three hundred forty five thousand one hundred and twenty three'"
+      (convert 7968345123) => "seven billion nine hundred sixty eight million three hundred forty five thousand one hundred and twenty three")
+
 (fact "quotmod supplied with dividend and divisor returns a vector of quotient and modulus"
       (quotmod 1 10) => [0 1]
       (quotmod 3 10) => [0 3]
       (quotmod 15 10) => [1 5]
       (quotmod 28 10) => [2 8]
       (quotmod 88 10) => [8 8]
-      (quotmod 100 100) => [1 nil]
-      (quotmod 100000 1000) => [100 nil])
+      (quotmod 100 100) => [1 0]
+      (quotmod 100000 1000) => [100 0])
 
 
 (facts "largest-divisor returns the largest divisor from divisor-to-words for a given nubmer."
@@ -111,7 +123,8 @@
 (facts "number-to-words returns words for numbers - covering tens and units"
        (fact "number-to-words returns 'twenty one' for 21"
              (number-to-words 21) => "twenty one")
-       (fact "number-to-words returns 'seventy eight' for 78"
+       (fact "number-
+to-words returns 'seventy eight' for 78"
              (number-to-words 78) => "seventy eight")
        (fact "number-to-words returns 'ninety nine' for 99"
              (number-to-words 99) => "ninety nine"))
