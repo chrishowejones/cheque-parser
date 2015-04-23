@@ -100,5 +100,3 @@
        (hundreds? number))
     (convert-to-words number)
     (convert-with-and number)))
-
-(convert 119392203)
