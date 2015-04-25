@@ -66,6 +66,14 @@
   [number]
   (zero? (mod number 100)))
 
+(defn- build-words
+  [number divisor words]
+  "Convert the number to words and append to a vector of existing words."
+  (let [vec-words (vec words)]
+   (if (hundreds? divisor)
+      (conj (conj vec-words (convert-to-words number)) (divisors-to-words divisor))
+      (conj vec-words (divisors-to-words divisor)))))
+
 (defn convert-to-words
   "Convert a number to it's word representation up to billions."
   [number]
@@ -77,9 +85,7 @@
             [quotient modulus] (quotmod n divisor)]
         (recur
          modulus
-         (if (hundreds? divisor)
-           (conj (conj words (convert-to-words quotient)) (divisors-to-words divisor))
-           (conj words (divisors-to-words divisor))))))))
+         (build-words quotient divisor words))))))
 
 
 (defn- convert-with-and
