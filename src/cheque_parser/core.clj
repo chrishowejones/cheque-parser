@@ -2,6 +2,8 @@
   (:gen-class)
   (:require [clojure.string :as str]))
 
+(declare convert-to-words)
+
 (def units-to-word
   {0 ""
    1 "one"
